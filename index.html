@@ -1,0 +1,79 @@
+---
+layout: page
+title: Global Data Justice
+subtitle: A globally inclusive dialogue about the future of data
+use-site-title: true
+---
+<br>
+How should data technologies be governed on the global level? What kind of debate can we have across borders and cultures about datafication, and what kind of debate do we need? Data markets, apps, and technology firms are global, but the systems we have to control them are local. People worldwide are developing strategies to align the way datafication develops with their needs and protect themselves from its negative impacts.<br><br> The Global Data Justice project focuses on the diverse debates and processes occurring around data governance in different regions, to draw out overarching principles and needs that can push data technologies’ governance in the direction of social justice.
+<br>
+<br>
+The project is based at the <a href="https://www.tilburguniversity.edu/research/institutes-and-research-groups/tilt/" target= _blank>Tilburg Institute for Law, Technology, and Society</a> in the Netherlands, and has received funding from the European Research Council (ERC) under the European Union's Horizon 2020 research and innovation programme (Grant Agreement n° 757247).<br><br>
+
+<center><img src="img/tilt.jpg" alt="TILT logo" height="100"><img src="img/EU_ERC.jpg" height="150"></center>
+	
+<div class="posts-list">
+  {% for post in paginator.posts %}
+  <article class="post-preview">
+    <a href="{{ post.url | prepend: site.baseurl }}">
+	  <h2 class="post-title">{{ post.title }}</h2>
+
+	  {% if post.subtitle %}
+	  <h3 class="post-subtitle">
+	    {{ post.subtitle }}
+	  </h3>
+	  {% endif %}
+    </a>
+
+    <p class="post-meta">
+      Posted on {{ post.date | date: "%B %-d, %Y" }}
+    </p>
+
+    <div class="post-entry-container">
+      {% if post.image %}
+      <div class="post-image">
+        <a href="{{ post.url | prepend: site.baseurl }}">
+          <img src="{{ post.image }}">
+        </a>
+      </div>
+      {% endif %}
+      <div class="post-entry">
+        {{ post.excerpt | strip_html | xml_escape | truncatewords: site.excerpt_length }}
+        {% assign excerpt_word_count = post.excerpt | number_of_words %}
+        {% if post.content != post.excerpt or excerpt_word_count > site.excerpt_length %}
+          <a href="{{ post.url | prepend: site.baseurl }}" class="post-read-more">[Read&nbsp;More]</a>
+        {% endif %}
+      </div>
+    </div>
+
+    {% if post.tags.size > 0 %}
+    <div class="blog-tags">
+      Tags:
+      {% if site.link-tags %}
+      {% for tag in post.tags %}
+      <a href="{{ site.baseurl }}/tags#{{- tag -}}">{{- tag -}}</a>
+      {% endfor %}
+      {% else %}
+        {{ post.tags | join: ", " }}
+      {% endif %}
+    </div>
+    {% endif %}
+
+   </article>
+  {% endfor %}
+</div>
+
+{% if paginator.total_pages > 1 %}
+<ul class="pager main-pager">
+  {% if paginator.previous_page %}
+  <li class="previous">
+    <a href="{{ paginator.previous_page_path | prepend: site.baseurl | replace: '//', '/' }}">&larr; Newer Posts</a>
+  </li>
+  {% endif %}
+  {% if paginator.next_page %}
+  <li class="next">
+    <a href="{{ paginator.next_page_path | prepend: site.baseurl | replace: '//', '/' }}">Older Posts &rarr;</a>
+  </li>
+  {% endif %}
+</ul>
+{% endif %}
